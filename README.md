@@ -2,15 +2,24 @@
 
 A new Flutter project.
 
-## Getting Started
+## Folder structure
+> api  -> Directory created by openapi generator
 
-This project is a starting point for a Flutter application.
+> lib
 
-A few resources to get you started if this is your first Flutter project:
+> ...
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+> petstore.yaml -> API config file (used by both client and server side)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> openapi-generator-cli.jar -> OpenAPI generator SDK
+
+> ...
+
+
+## How to generator code
+```bash
+java -jar openapi-generator-cli.jar generate -i petstore.yaml -g dart-dio -o api
+cd api
+flutter pub get
+flutter pub run build_runner build
+```
