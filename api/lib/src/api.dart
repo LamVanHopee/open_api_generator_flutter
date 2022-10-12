@@ -14,7 +14,7 @@ import 'package:openapi/src/api/store_api.dart';
 import 'package:openapi/src/api/user_api.dart';
 
 class Openapi {
-  static const String basePath = r'http://petstore.swagger.io/v2';
+  static const String basePath = r'https://petstore.swagger.io/v2';
 
   final Dio dio;
   final Serializers serializers;
