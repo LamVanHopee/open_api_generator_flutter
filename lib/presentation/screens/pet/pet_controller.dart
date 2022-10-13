@@ -2,7 +2,9 @@ import 'dart:math';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:open_api_generator_flutter/core/base/base_controller.dart';
+import 'package:open_api_generator_flutter/domain/entity/category.dart';
 import 'package:open_api_generator_flutter/domain/entity/pet.dart';
+import 'package:open_api_generator_flutter/domain/entity/tag.dart';
 import 'package:open_api_generator_flutter/domain/repository/pet_repository.dart';
 import 'package:openapi/openapi.dart';
 
@@ -14,8 +16,19 @@ class PetController extends BaseController {
   void addPet() async {
     try {
       EasyLoading.show();
-      var pet =
-          await petRepository.addPet(PetEntity(name: getPetName(), photoUrls: [], status: PetStatusEnum.available));
+      var pet = await petRepository.addPet(PetEntity(
+        name: getPetName(),
+        photoUrls: [],
+        status: PetStatusEnum.available,
+        tags: [
+          TagEntity(id: 1, name: "Sale"),
+          TagEntity(id: 2, name: "Sale"),
+        ],
+        category: CategoryEntity(
+          name: 'Dog',
+          id: 2,
+        ),
+      ));
       EasyLoading.dismiss();
       if (pet != null) {
         pets.add(pet);

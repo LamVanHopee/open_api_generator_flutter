@@ -10,8 +10,9 @@ class PetMapper extends BaseMapper<Pet, PetEntity> {
   Pet mapToDTO(PetEntity entity) {
     return Pet((builder) {
       builder.name = entity.name;
-      builder.tags =
-          (entity.tags == null ? null : TagMapper().mapToDTOs(entity.tags).toBuiltList()) as ListBuilder<Tag>?;
+      if (entity.tags != null) {
+        builder.tags.replace(TagMapper().mapToDTOs(entity.tags));
+      }
       if (entity.category != null) {
         builder.category.replace(CategoryMapper().mapToDTO(entity.category!));
       }
