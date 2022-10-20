@@ -1,34 +1,37 @@
 import 'dart:math';
+import 'package:built_collection/src/list.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:open_api_generator_flutter/core/base/base_controller.dart';
-import 'package:open_api_generator_flutter/domain/entity/category.dart';
-import 'package:open_api_generator_flutter/domain/entity/pet.dart';
-import 'package:open_api_generator_flutter/domain/entity/tag.dart';
-import 'package:open_api_generator_flutter/domain/repository/pet_repository.dart';
+import 'package:open_api_generator_flutter/data/repository/pet_repository.dart';
 import 'package:openapi/openapi.dart';
 
 class PetController extends BaseController {
   var random = Random();
   final petRepository = Get.find<PetRepository>();
-  var pets = <PetEntity>[].obs;
+  var pets = <Pet>[].obs;
 
   void addPet() async {
     try {
       EasyLoading.show();
-      var pet = await petRepository.addPet(PetEntity(
-        name: getPetName(),
-        photoUrls: [],
-        status: PetStatusEnum.available,
-        tags: [
-          TagEntity(id: 1, name: "Sale"),
-          TagEntity(id: 2, name: "Sale"),
-        ],
-        category: CategoryEntity(
-          name: 'Dog',
-          id: 2,
-        ),
-      ));
+      var pet = await petRepository.addPet(Pet((builder) {
+        builder.name = getPetName();
+        builder.photoUrls = ListBuilder([]);
+        builder.status = PetStatusEnum.available;
+        builder.tags = ListBuilder([
+          Tag((builderTag) {
+            builderTag.id = 1;
+            builderTag.name = "Sale";
+          }),
+          Tag((builderTag) {
+            builderTag.id = 2;
+            builderTag.name = "Sale";
+          }),
+        ]);
+        builder.category = CategoryBuilder()
+          ..name = 'Dog'
+          ..id = 2;
+      }));
       EasyLoading.dismiss();
       if (pet != null) {
         pets.add(pet);
@@ -41,8 +44,11 @@ class PetController extends BaseController {
   void removePet() async {
     try {
       EasyLoading.show();
-      var pet =
-          await petRepository.addPet(PetEntity(name: getPetName(), photoUrls: [], status: PetStatusEnum.available));
+      var pet = await petRepository.addPet(Pet((b) {
+        b.name = getPetName();
+        b.photoUrls = ListBuilder([]);
+        b.status = PetStatusEnum.available;
+      }));
       EasyLoading.dismiss();
       if (pet != null) {
         pets.add(pet);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:open_api_generator_flutter/presentation/screens/pet/components/pet_item.dart';
-import 'package:open_api_generator_flutter/presentation/screens/pet/pet_controller.dart';
+import 'package:open_api_generator_flutter/views/screens/pet/components/pet_item.dart';
+import 'package:open_api_generator_flutter/views/screens/pet/pet_controller.dart';
 
 class PetScreen extends GetView<PetController> {
   const PetScreen({Key? key}) : super(key: key);

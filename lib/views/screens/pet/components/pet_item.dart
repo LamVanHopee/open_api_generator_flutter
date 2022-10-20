@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:open_api_generator_flutter/domain/entity/pet.dart';
+import 'package:openapi/openapi.dart';
 
 class PetItem extends StatelessWidget {
   const PetItem({Key? key, required this.pet, this.onDelete}) : super(key: key);
 
-  final PetEntity pet;
+  final Pet pet;
   final void Function(int petId)? onDelete;
 
   @override

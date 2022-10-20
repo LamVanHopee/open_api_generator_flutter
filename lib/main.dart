@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:open_api_generator_flutter/presentation/route/router.dart';
-import 'package:open_api_generator_flutter/presentation/screens/pet/pet_binding.dart';
+import 'package:open_api_generator_flutter/routes/router.dart';
 
-import 'main_binding.dart';
+import 'bindings/main_binding.dart';
 
 void main() {
   runApp(const MyApp());
